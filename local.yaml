@@ -1,0 +1,41 @@
+services:
+  shop-server:
+    container_name: "shop-server"
+    build:
+      context: .
+      dockerfile: docker/local/server/Dockerfile
+
+    env_file:
+      - ${LOCAL_ENV}
+    volumes:
+      - ./server:/server
+    ports:
+      - "8080:3000"
+    networks:
+     - "shop_db_nw"
+    command: npm run dev
+
+  shop-pg-db:
+    build:
+      context: .
+      dockerfile: ./docker/local/pg/Dockerfile
+    container_name: shop-pg-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - shop_pg_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]
+      interval: 1s
+      timeout: 10s
+      retries: 5
+    env_file:
+      - ${LOCAL_ENV}
+    networks:
+      - shop_db_nw
+networks:
+  shop_db_nw:
+
+volumes:
+  shop_pg_data: {}
