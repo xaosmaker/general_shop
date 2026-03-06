@@ -1,0 +1,18 @@
+this will be a general purpose app for coffee shop with delivery.
+the user will login and can order a coffee or whatever the shop sell
+
+the owner can own multiple shops and the shops will be intependent and the items 
+they sell will be intependent.
+
+this will have item agnostic categories and the owner can register any item
+he want.
+
+the items can have multiple variants with the choice of multiple select or select 
+one variant.
+
+the order placed will be accepted from the worker if the item has quantity the quantity
+will reduced on the order accept after the payment.
+
+there is and option for paying on delivery or paying with card.
+
+
